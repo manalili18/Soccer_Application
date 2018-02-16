@@ -18,6 +18,7 @@ import java.util.*;
  */
 public class SoccerDatabase implements SoccerDB {
 
+    private Hashtable<String,SoccerPlayer> playerTable = new Hashtable<>();
     /**
      * add a player
      *
@@ -26,7 +27,13 @@ public class SoccerDatabase implements SoccerDB {
     @Override
 	public boolean addPlayer(String firstName, String lastName,
 			int uniformNumber, String teamName) {
-        return false;
+        if(playerTable.containsKey(firstName.trim()+"##"+lastName.trim())){
+            return false;
+        } else {
+            SoccerPlayer sp = new SoccerPlayer(firstName.trim(),lastName.trim(),uniformNumber,teamName);
+            playerTable.put(firstName.trim()+"##"+lastName.trim(),sp);
+            return true;
+        }
 	}
 
     /**
